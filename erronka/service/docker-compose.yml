@@ -12,3 +12,10 @@ services:
             dockerfile: Dockerfile
         ports:
             - "8822:22"
+    ssl:
+        build:
+            context: ./ssl_service
+            dockerfile: Dockerfile
+        ports:
+            - "xxxx:xx"
+                      
