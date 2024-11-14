@@ -12,10 +12,10 @@ services:
             dockerfile: Dockerfile
         ports:
             - "8822:22"
-    ssl:
+    upload:
         build:
-            context: ./ssl_service
+            context: ./upload
             dockerfile: Dockerfile
         ports:
-            - "xxxx:xx"
+            - "5003:5000"
                       
