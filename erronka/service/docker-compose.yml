@@ -1,28 +1,11 @@
 version: '3'
 services:
-    web:
+    php:
         build:
-            context: ./web
+            context: ./php
             dockerfile: Dockerfile
         ports:
-            - "9797:80"
-    ssh:
-        build:
-            context: ./ssh
-            dockerfile: Dockerfile
-        ports:
-            - "8822:22"
-    upload:
-        build:
-            context: ./upload
-            dockerfile: Dockerfile
-        ports:
-            - "5003:5000"
-    php_service:
-        image: php:8.1-cli
+            - "8001:80"
         volumes:
-            - ./upload:/var/www/html
-        command: php -S 0.0.0.0:8000 -t /var/www/html
-        ports:
-            - "8001:8000"
-                      
+            - ./php:/var/www/html
+                        
