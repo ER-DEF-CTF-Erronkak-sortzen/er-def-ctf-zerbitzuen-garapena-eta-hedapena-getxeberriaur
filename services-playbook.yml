@@ -4,7 +4,7 @@
   # become: true
 
   vars:
-    services_destination_folder: "/root/services"
+    services_destination_folder: "/root/services/"
 
   tasks:
     - name: Create services_destination_folder if it doesn't exist
