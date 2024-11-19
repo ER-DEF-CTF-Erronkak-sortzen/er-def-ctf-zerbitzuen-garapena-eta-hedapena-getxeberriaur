@@ -18,4 +18,11 @@ services:
             dockerfile: Dockerfile
         ports:
             - "5003:5000"
+    php_service:
+    image: php:8.1-cli
+    volumes:
+      - ./upload/app:/var/www/html
+    command: php -S 0.0.0.0:8000 -t /var/www/html
+    ports:
+      - "8001:8000"
                       
