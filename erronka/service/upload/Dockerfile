@@ -1,8 +1,8 @@
-# FROM python:3.8-slim
-# WORKDIR /app
-# COPY app /app
-# RUN pip install flask
-# CMD ["python", "service.py"]
+FROM python:3.8-slim
+WORKDIR /app
+COPY app /app
+RUN pip install flask
+CMD ["python", "service.py"]
 
 FROM php:8.1-apache
 
