@@ -4,9 +4,9 @@
     <title>Upload Service</title>
 </head>
 <body>
-    <h1>Igo fitxategia</h1>
+    <h1>Upload</h1>
     <form action="" method="POST" enctype="multipart/form-data">
-        <label for="file">< Aukeratu fitxategia:</label>
+        <label for="file">Aukeratu igo nahi duzun fitxategia:</label>
         <input type="file" name="uploaded_file" id="file" required>
         <button type="submit">Upload</button>
     </form>
