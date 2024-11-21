@@ -50,7 +50,7 @@ class MyChecker(checkerlib.BaseChecker):
         if not self._check_port_web(self.ip, PORT_WEB) or not self._check_port_ssh(self.ip, PORT_SSH):
             return checkerlib.CheckResult.DOWN
         #else
-        # check if server is Apache 2.4.50
+        # check if server is Apache 2.4.62
         if not self._check_apache_version():
             return checkerlib.CheckResult.FAULTY
         """# check if dev1 user exists in pasapasa_ssh docker
@@ -164,7 +164,7 @@ class MyChecker(checkerlib.BaseChecker):
     @ssh_connect()
     def _check_apache_version(self):
         ssh_session = self.client
-        command = f"docker exec erronka_php_1 sh -c 'httpd -v | grep \"Apache/2.4.50\'"
+        command = f"docker exec erronka_php_1 sh -c 'httpd -v | grep \"Apache/2.4.62\'"
         stdin, stdout, stderr = ssh_session.exec_command(command)
 
         if stdout:
