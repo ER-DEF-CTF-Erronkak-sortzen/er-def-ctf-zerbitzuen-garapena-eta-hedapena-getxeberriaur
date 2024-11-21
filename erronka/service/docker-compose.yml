@@ -6,6 +6,5 @@ services:
             dockerfile: Dockerfile
         ports:
             - "8001:80"
-        #volumes:
-          #  - ./php:/var/www/html
+      
                         
