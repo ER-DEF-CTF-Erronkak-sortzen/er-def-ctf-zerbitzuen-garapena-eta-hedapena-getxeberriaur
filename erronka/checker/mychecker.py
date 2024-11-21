@@ -8,7 +8,9 @@ import paramiko
 import hashlib
 # PORT_WEB = 9797
 PORT_WEB = 8001
-PORT_SSH = 8822
+PORT_SSH = 22
+# PORT_SSH = 8822
+
 def ssh_connect():
     def decorator(func):
         def wrapper(*args, **kwargs):
