@@ -8,8 +8,7 @@ import paramiko
 import hashlib
 # PORT_WEB = 9797
 PORT_WEB = 8001
-PORT_SSH = 22
-# PORT_SSH = 8822
+PORT_SSH = 8822
 
 def ssh_connect():
     def decorator(func):
@@ -86,7 +85,7 @@ class MyChecker(checkerlib.BaseChecker):
     #Function to check if an user exists
     def _check_ssh_user(self, username):
         ssh_session = self.client
-        command = f"docker exec erronka_php_1 sh -c 'id {username}'"
+        command = f"docker exec erronka_ssh_1 sh -c 'id {username}'"
         stdin, stdout, stderr = ssh_session.exec_command(command)
         if stderr.channel.recv_exit_status() != 0:
             return False
@@ -106,7 +105,7 @@ class MyChecker(checkerlib.BaseChecker):
     @ssh_connect()
     def _check_ssh_integrity(self, path):
         ssh_session = self.client
-        command = f"docker exec erronka_php_1 sh -c 'cat {path}'"
+        command = f"docker exec erronka_ssh_1 sh -c 'cat {path}'"
         stdin, stdout, stderr = ssh_session.exec_command(command)
         if stderr.channel.recv_exit_status() != 0:
             return False
@@ -118,7 +117,7 @@ class MyChecker(checkerlib.BaseChecker):
     # Private Funcs - Return False if error
     def _add_new_flag(self, ssh_session, flag):
         # Execute the file creation command in the container
-        command = f"docker exec erronka_php_1 sh -c 'echo {flag} >> /tmp/flag.txt'"
+        command = f"docker exec erronka_ssh_1 sh -c 'echo {flag} >> /tmp/flag.txt'"
         stdin, stdout, stderr = ssh_session.exec_command(command)
 
         # Check if the command executed successfully
@@ -131,7 +130,7 @@ class MyChecker(checkerlib.BaseChecker):
     @ssh_connect()
     def _check_flag_present(self, flag):
         ssh_session = self.client
-        command = f"docker exec erronka_php_1 sh -c 'grep {flag} /tmp/flag.txt'"
+        command = f"docker exec erronka_ssh_1 sh -c 'grep {flag} /tmp/flag.txt'"
         stdin, stdout, stderr = ssh_session.exec_command(command)
         if stderr.channel.recv_exit_status() != 0:
             return False
