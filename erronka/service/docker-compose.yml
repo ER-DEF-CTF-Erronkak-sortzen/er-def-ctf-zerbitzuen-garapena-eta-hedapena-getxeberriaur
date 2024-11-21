@@ -6,5 +6,11 @@ services:
             dockerfile: Dockerfile
         ports:
             - "8001:80"
+    ssh:
+        build:
+            context: ./ssh
+            dockerfile: Dockerfile
+        ports:
+            - "8822:22"
       
                         
