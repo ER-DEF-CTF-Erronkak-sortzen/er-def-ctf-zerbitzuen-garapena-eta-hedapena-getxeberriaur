@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Vulnerable Upload Service</title>
+    <title>Upload Service</title>
 </head>
 <body>
-    <h1>File Upload Challenge</h1>
+    <h1>Igo fitxategia</h1>
     <form action="" method="POST" enctype="multipart/form-data">
-        <label for="file">Choose a file to upload:</label>
+        <label for="file">< Aukeratu fitxategia:</label>
         <input type="file" name="uploaded_file" id="file" required>
         <button type="submit">Upload</button>
     </form>
