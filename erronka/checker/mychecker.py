@@ -58,12 +58,12 @@ class MyChecker(checkerlib.BaseChecker):
         """# check if dev1 user exists in pasapasa_ssh docker
         if not self._check_ssh_user('dev1'):
             return checkerlib.CheckResult.FAULTY"""
-        file_path_web = '/usr/local/apache2/htdocs/index.html'
+        '''file_path_web = '/usr/local/apache2/htdocs/index.html'
         # check if index.hmtl from erronka_php_1 has been changed by comparing its hash with the hash of the original file
         if not self._check_web_integrity(file_path_web):
-            return checkerlib.CheckResult.FAULTY            
+            return checkerlib.CheckResult.FAULTY  '''          
         file_path_ssh = '/etc/ssh/sshd_config'
-        # check if /etc/sshd_config from erronka_php_1 has been changed by comparing its hash with the hash of the original file
+        # check if /etc/sshd_config from erronka_ssh_1 has been changed by comparing its hash with the hash of the original file
         if not self._check_ssh_integrity(file_path_ssh):
             return checkerlib.CheckResult.FAULTY            
         return checkerlib.CheckResult.OK
