@@ -101,7 +101,7 @@ class MyChecker(checkerlib.BaseChecker):
             return False
         return True'''
       
-    @ssh_connect()
+    '''@ssh_connect()
     def _check_web_integrity(self, path):
         ssh_session = self.client
         command = f"docker exec erronka_php_1 sh -c 'cat {path}'"
@@ -112,7 +112,7 @@ class MyChecker(checkerlib.BaseChecker):
         output = stdout.read().decode().strip()
         return hashlib.md5(output.encode()).hexdigest() == 'a4ed71eb4f7c89ff868088a62fe33036'
     
-    ''' @ssh_connect()
+    @ssh_connect()
     def _check_ssh_integrity(self, path):
         ssh_session = self.client
         command = f"docker exec erronka_ssh_1 sh -c 'cat {path}'"
