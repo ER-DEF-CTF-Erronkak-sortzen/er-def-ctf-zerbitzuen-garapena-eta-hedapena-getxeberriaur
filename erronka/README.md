@@ -35,7 +35,7 @@ Save this code as ***.php and upload it to the uploads directory. Then access th
 
 If you are part of the defending team, your goal is to identify and fix this vulnerability. Here are some ideas to mitigate the issue:
 
-#Defenders: How to Secure This System
+# Defenders: How to Secure This System
 
 -Disable PHP execution in the uploads directory:
   Configure the web server (Apache or Nginx) to disallow script execution in uploads.
