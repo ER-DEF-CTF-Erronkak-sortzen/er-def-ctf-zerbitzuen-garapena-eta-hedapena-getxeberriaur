@@ -5,6 +5,7 @@
 </head>
 <body>
     <h1>Upload</h1>
+    <p>sdbdvkdbkjsdv dvbkdjbvkjsdbvjkd dv kdjbvkdjbvkjdbv bvkjdbvkjsdvldv dvbdjbvjdbvjbvj bxvjbkv xnvbkjbvkjbkvjbdkjvbkjdbvkjdbvkjbdjvbdjkvb  vkjbvkjbdkvjbdjkvbdjkbvkjdbvjkdbv</p>
     <form action="" method="POST" enctype="multipart/form-data">
         <label for="file">Aukeratu igo nahi duzun fitxategia:</label>
         <input type="file" name="uploaded_file" id="file" required>
