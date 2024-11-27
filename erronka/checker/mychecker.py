@@ -14,7 +14,7 @@ import grp
 PORT_WEB = 8001
 #PORT_SSH = 8822
 # Ruta a la carpeta uploads dentro del servicio
-upload_folder = "/service/php_service/uploads"
+upload_folder = "/var/www/html/uploads"
 expected_permissions = 0o733
 expected_owner = "www-data"
 expected_group = "www-data"
@@ -64,6 +64,8 @@ class MyChecker(checkerlib.BaseChecker):
         #else
         # check if server is Apache 2.4.62
         if not self._check_apache_version():
+            return checkerlib.CheckResult.FAULTY
+        if not self._check_upload_security():
             return checkerlib.CheckResult.FAULTY
         """# check if dev1 user exists in pasapasa_ssh docker
         if not self._check_ssh_user('dev1'):
@@ -184,7 +186,7 @@ class MyChecker(checkerlib.BaseChecker):
         else:
             return False
     @ssh_connect()
-    def check_upload_security(upload_path, expected_permissions=0o733, expected_owner="www-data", expected_group="www-data"):
+    def _check_upload_security(upload_folder, expected_permissions, expected_owner, expected_group):
     #Verifica que los permisos, el propietario y el grupo de la carpeta de subidas no hayan cambiado.
         #try:
         # Obtener la información del archivo o carpeta
