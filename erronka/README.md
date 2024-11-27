@@ -47,14 +47,6 @@ If you are part of the defending team, your goal is to identify and fix this vul
 - Ports to reach dockers are open (WEB:8001)
 - Upload folder has unchanged permissions: Set 777 permissions for the uploads directory
 
-Checks done: 
-- TEAM 0. Stop the container: 'root@team0-services:~# docker stop pasapasa_web_1' It works OK, service's status becomes DOWN. 
-- TEAM 1. Stop the container: 'root@team0-services:~# docker stop pasapasa_ssh_1' It works OK, service's status becomes DOWN.
-- TEAM 2. 'userdel dev1'. It works OK, service's status becomes faulty. 
-- TEAM 3. Change '/etc/sshd_config' file from 'pasapasa_ssh' docker. It works OK, service's status becomes faulty.
-- TEAM 4. Change '/usr/local/apache2/htdocs/index.html' file from 'pasapasa_web' docker. It works OK, service's status becomes faulty.
-- TEAM 5. 'ssh service stop'. It works OK, service's status becomes faulty. 
-- TEAM 0. apt update apache2
 # License notes
 Parts from:
 https://github.com/kristianvld/SQL-Injection-Playground
