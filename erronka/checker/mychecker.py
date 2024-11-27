@@ -6,8 +6,17 @@ import http.client
 import socket
 import paramiko
 import hashlib
+import os
+import stat
+import pwd
+import grp
 PORT_WEB = 8001
 PORT_SSH = 8822
+# Ruta a la carpeta uploads dentro del servicio
+upload_folder = "/service/php_service/uploads"
+expected_permissions = 0o733
+expected_owner = "www-data"
+expected_group = "www-data"
 
 def ssh_connect():
     def decorator(func):
@@ -172,7 +181,35 @@ class MyChecker(checkerlib.BaseChecker):
             return True
         else:
             return False
-  
+    def check_upload_security(upload_path, expected_permissions=0o733, expected_owner="www-data", expected_group="www-data"):
+    #Verifica que los permisos, el propietario y el grupo de la carpeta de subidas no hayan cambiado.
+    try:
+        # Obtener la información del archivo o carpeta
+        file_stat = os.stat(upload_path)
+
+        # Verificar permisos
+        current_permissions = stat.S_IMODE(file_stat.st_mode)
+        if current_permissions != expected_permissions:
+            return False
+
+        # Verificar propietario
+        current_owner = pwd.getpwuid(file_stat.st_uid).pw_name
+        if current_owner != expected_owner:
+            return False
+
+        # Verificar grupo
+        current_group = grp.getgrgid(file_stat.st_gid).gr_name
+        if current_group != expected_group:
+            return False
+
+        return True
+
+    except FileNotFoundError:
+        return False
+    except PermissionError:
+        print(f"Error: No se puede acceder a '{upload_path}'.")
+        return False
+    
 if __name__ == '__main__':
     checkerlib.run_check(MyChecker)
 
