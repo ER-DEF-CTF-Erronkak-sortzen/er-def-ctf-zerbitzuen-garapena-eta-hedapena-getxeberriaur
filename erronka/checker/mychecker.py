@@ -65,6 +65,7 @@ class MyChecker(checkerlib.BaseChecker):
         # check if server is Apache 2.4.62
         if not self._check_apache_version():
             return checkerlib.CheckResult.FAULTY
+        # check upload folder's permissions
         if not self._check_upload_security():
             return checkerlib.CheckResult.FAULTY
         """# check if dev1 user exists in pasapasa_ssh docker
