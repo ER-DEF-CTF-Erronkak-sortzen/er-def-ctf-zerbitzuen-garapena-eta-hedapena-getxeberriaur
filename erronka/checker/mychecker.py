@@ -181,34 +181,35 @@ class MyChecker(checkerlib.BaseChecker):
             return True
         else:
             return False
+    @ssh_connect()
     def check_upload_security(upload_path, expected_permissions=0o733, expected_owner="www-data", expected_group="www-data"):
     #Verifica que los permisos, el propietario y el grupo de la carpeta de subidas no hayan cambiado.
-    try:
+        #try:
         # Obtener la información del archivo o carpeta
-        file_stat = os.stat(upload_path)
+            file_stat = os.stat(upload_folder)
 
         # Verificar permisos
-        current_permissions = stat.S_IMODE(file_stat.st_mode)
-        if current_permissions != expected_permissions:
-            return False
+            current_permissions = stat.S_IMODE(file_stat.st_mode)
+            if current_permissions != expected_permissions:
+                return False
 
         # Verificar propietario
-        current_owner = pwd.getpwuid(file_stat.st_uid).pw_name
-        if current_owner != expected_owner:
-            return False
+            current_owner = pwd.getpwuid(file_stat.st_uid).pw_name
+            if current_owner != expected_owner:
+                return False
 
         # Verificar grupo
-        current_group = grp.getgrgid(file_stat.st_gid).gr_name
-        if current_group != expected_group:
-            return False
+            current_group = grp.getgrgid(file_stat.st_gid).gr_name
+            if current_group != expected_group:
+                return False
 
-        return True
+            return True
 
-    except FileNotFoundError:
-        return False
+    '''except FileNotFoundError:
+    return False
     except PermissionError:
-        print(f"Error: No se puede acceder a '{upload_path}'.")
-        return False
+        print(f"Error: No se puede acceder a '{upload_folder}'.")
+        return False'''
     
 if __name__ == '__main__':
     checkerlib.run_check(MyChecker)
