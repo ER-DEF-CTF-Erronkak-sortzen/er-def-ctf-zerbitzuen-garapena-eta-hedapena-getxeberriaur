@@ -42,7 +42,6 @@ If you are part of the defending team, your goal is to identify and fix this vul
 -Validate allowed file types:
   Ensure only safe file types, such as images, can be uploaded.
      
-
 # Checker checks:
 - Ports to reach dockers are open (WEB:8001)
 - Upload folder has unchanged permissions: Set 777 permissions for the uploads directory
