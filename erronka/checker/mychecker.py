@@ -6,12 +6,13 @@ import http.client
 import socket
 import paramiko
 import hashlib
+#uploads begiratzeko
 import os
 import stat
 import pwd
 import grp
 PORT_WEB = 8001
-PORT_SSH = 8822
+#PORT_SSH = 8822
 # Ruta a la carpeta uploads dentro del servicio
 upload_folder = "/service/php_service/uploads"
 expected_permissions = 0o733
@@ -57,7 +58,8 @@ class MyChecker(checkerlib.BaseChecker):
 
     def check_service(self):
         # check if ports are open
-        if not self._check_port_web(self.ip, PORT_WEB) or not self._check_port_ssh(self.ip, PORT_SSH):
+        # if not self._check_port_web(self.ip, PORT_WEB) or not self._check_port_ssh(self.ip, PORT_SSH):
+        if not self._check_port_web(self.ip, PORT_WEB):
             return checkerlib.CheckResult.DOWN
         #else
         # check if server is Apache 2.4.62
@@ -66,15 +68,15 @@ class MyChecker(checkerlib.BaseChecker):
         """# check if dev1 user exists in pasapasa_ssh docker
         if not self._check_ssh_user('dev1'):
             return checkerlib.CheckResult.FAULTY"""
-        '''file_path_web = '/usr/local/apache2/htdocs/index.html'
-        # check if index.hmtl from erronka_php_1 has been changed by comparing its hash with the hash of the original file
+        file_path_web = '/var/www/html/index.php'
+        # check if index.php from erronka_php_1 has been changed by comparing its hash with the hash of the original file
         if not self._check_web_integrity(file_path_web):
-            return checkerlib.CheckResult.FAULTY  '''          
-        file_path_ssh = '/etc/ssh/sshd_config'
+            return checkerlib.CheckResult.FAULTY        
+        '''file_path_ssh = '/etc/ssh/sshd_config'
         # check if /etc/sshd_config from erronka_ssh_1 has been changed by comparing its hash with the hash of the original file
         if not self._check_ssh_integrity(file_path_ssh):
             return checkerlib.CheckResult.FAULTY            
-        return checkerlib.CheckResult.OK
+        return checkerlib.CheckResult.OK'''
     
     def check_flag(self, tick):
         if not self.check_service():
@@ -110,7 +112,7 @@ class MyChecker(checkerlib.BaseChecker):
         output = stdout.read().decode().strip()
         return hashlib.md5(output.encode()).hexdigest() == 'a4ed71eb4f7c89ff868088a62fe33036'
     
-    @ssh_connect()
+    ''' @ssh_connect()
     def _check_ssh_integrity(self, path):
         ssh_session = self.client
         command = f"docker exec erronka_ssh_1 sh -c 'cat {path}'"
@@ -120,7 +122,7 @@ class MyChecker(checkerlib.BaseChecker):
         output = stdout.read().decode().strip()
         print (hashlib.md5(output.encode()).hexdigest())
 
-        return hashlib.md5(output.encode()).hexdigest() == 'ba55c65e08e320f1225c76f810f1328b'
+        return hashlib.md5(output.encode()).hexdigest() == 'ba55c65e08e320f1225c76f810f1328b'''
   
     # Private Funcs - Return False if error
     def _add_new_flag(self, ssh_session, flag):
@@ -159,7 +161,7 @@ class MyChecker(checkerlib.BaseChecker):
             if conn:
                 conn.close()
 
-    def _check_port_ssh(self, ip, port):
+    '''def _check_port_ssh(self, ip, port):
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(5)
@@ -169,7 +171,7 @@ class MyChecker(checkerlib.BaseChecker):
             print(f"Exception: {e}")
             return False
         finally:
-            sock.close()
+            sock.close()'''
 
     @ssh_connect()
     def _check_apache_version(self):
