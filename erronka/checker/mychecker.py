@@ -15,9 +15,9 @@ PORT_WEB = 8001
 #PORT_SSH = 8822
 # Ruta a la carpeta uploads dentro del servicio
 upload_folder = "/var/www/html/uploads"
-expected_permissions = 0o733
-expected_owner = "www-data"
-expected_group = "www-data"
+expected_permissions = 777
+expected_owner = "root"
+expected_group = "root"
 
 def ssh_connect():
     def decorator(func):
