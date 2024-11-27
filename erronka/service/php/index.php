@@ -4,8 +4,9 @@
     <title>Upload Service</title>
 </head>
 <body>
-    <h1>Upload</h1>
-    <p>sdbdvkdbkjsdv dvbkdjbvkjsdbvjkd dv kdjbvkdjbvkjdbv bvkjdbvkjsdvldv dvbdjbvjdbvjbvj bxvjbkv xnvbkjbvkjbkvjbdkjvbkjdbvkjdbvkjbdjvbdjkvb  vkjbvkjbdkvjbdjkvbdjkbvkjdbvjkdbv</p>
+    <h1>Webgunea</h1>
+    <p>vbvkjsbvkjbevkjwe ekvbekbvebv ewkvjbejbvjk ekvbejbvjke ekvjbekvb kebvebv kevbebvkjebv ekvbekvbkjdvbkj vekvbkejbvd vkevbekbjvkebv dvebkvjbekvjbejbv evkejbvkebvkje vkevbekbvkebjvk</p>
+    <h2>Upload</h2>
     <form action="" method="POST" enctype="multipart/form-data">
         <label for="file">Aukeratu igo nahi duzun fitxategia:</label>
         <input type="file" name="uploaded_file" id="file" required>
