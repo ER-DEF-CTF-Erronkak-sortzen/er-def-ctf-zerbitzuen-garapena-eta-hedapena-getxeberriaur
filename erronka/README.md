@@ -29,7 +29,7 @@ The following PHP code can help you create a file to retrieve the flag:
 Save this code as ***.php and upload it to the uploads directory. Then access the file via your browser to execute it.
   Copy last flags
   Exit
-  'ssh -i /home/urko/Deskargak/keyak/team2-sshkey root@10.0.1.1'
+  'ssh root@10.0.1.1'
   nano /root/xxx.flag
     Paste copied flags. 
 
