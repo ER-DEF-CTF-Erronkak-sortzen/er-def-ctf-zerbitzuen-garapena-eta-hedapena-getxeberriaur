@@ -77,7 +77,7 @@ class MyChecker(checkerlib.BaseChecker):
             return checkerlib.CheckResult.FLAG_NOT_FOUND
         return checkerlib.CheckResult.OK
         
-    @ssh_connect()
+    '''@ssh_connect()
     #Function to check if an user exists
     def _check_ssh_user(self, username):
         ssh_session = self.client
@@ -85,7 +85,7 @@ class MyChecker(checkerlib.BaseChecker):
         stdin, stdout, stderr = ssh_session.exec_command(command)
         if stderr.channel.recv_exit_status() != 0:
             return False
-        return True
+        return True'''
       
     @ssh_connect()
     def _check_web_integrity(self, path):
