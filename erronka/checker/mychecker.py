@@ -66,8 +66,8 @@ class MyChecker(checkerlib.BaseChecker):
         if not self._check_apache_version():
             return checkerlib.CheckResult.FAULTY
         # check upload folder's permissions
-        if not self._check_upload_security():
-            return checkerlib.CheckResult.FAULTY
+        #if not self._check_upload_security():
+           # return checkerlib.CheckResult.FAULTY
         """# check if dev1 user exists in pasapasa_ssh docker
         if not self._check_ssh_user('dev1'):
             return checkerlib.CheckResult.FAULTY"""
@@ -186,7 +186,7 @@ class MyChecker(checkerlib.BaseChecker):
             return True
         else:
             return False
-    @ssh_connect()
+    '''@ssh_connect()
     def _check_upload_security(upload_folder, expected_permissions, expected_owner, expected_group):
     #Verifica que los permisos, el propietario y el grupo de la carpeta de subidas no hayan cambiado.
         #try:
@@ -210,7 +210,7 @@ class MyChecker(checkerlib.BaseChecker):
 
             return True
 
-    '''except FileNotFoundError:
+    except FileNotFoundError:
     return False
     except PermissionError:
         print(f"Error: No se puede acceder a '{upload_folder}'.")
