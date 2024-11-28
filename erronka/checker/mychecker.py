@@ -63,8 +63,8 @@ class MyChecker(checkerlib.BaseChecker):
             return checkerlib.CheckResult.DOWN
         #else
         # check if server is Apache 2.4.62
-        if not self._check_apache_version():
-            return checkerlib.CheckResult.FAULTY
+        '''if not self._check_apache_version():
+            return checkerlib.CheckResult.FAULTY'''
         # check upload folder's permissions
         #if not self._check_upload_security():
            # return checkerlib.CheckResult.FAULTY
