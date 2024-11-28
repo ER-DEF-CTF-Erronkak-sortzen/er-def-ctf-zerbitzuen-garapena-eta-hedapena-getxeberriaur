@@ -85,7 +85,7 @@ class MyChecker(checkerlib.BaseChecker):
         stdin, stdout, stderr = ssh_session.exec_command(command)
         if stderr.channel.recv_exit_status() != 0:
             return False
-        return True'''
+        return True
       
     @ssh_connect()
     def _check_web_integrity(self, path):
@@ -98,7 +98,7 @@ class MyChecker(checkerlib.BaseChecker):
         output = stdout.read().decode().strip()
         return hashlib.md5(output.encode()).hexdigest() == 'a4ed71eb4f7c89ff868088a62fe33036'
     
-    '''@ssh_connect()
+    @ssh_connect()
     def _check_ssh_integrity(self, path):
         ssh_session = self.client
         command = f"docker exec pasapasa_ssh_1 sh -c 'cat {path}'"
@@ -134,7 +134,7 @@ class MyChecker(checkerlib.BaseChecker):
         output = stdout.read().decode().strip()
         return flag == output
 
-    def _check_port_web(self, ip, port):
+    '''def _check_port_web(self, ip, port):
         try:
             conn = http.client.HTTPConnection(ip, port, timeout=5)
             conn.request("GET", "/")
@@ -168,7 +168,7 @@ class MyChecker(checkerlib.BaseChecker):
         if stdout:
             return True
         else:
-            return False
+            return False'''
   
 if __name__ == '__main__':
     checkerlib.run_check(MyChecker)
