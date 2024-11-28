@@ -6,19 +6,8 @@ import http.client
 import socket
 import paramiko
 import hashlib
-'''uploads begiratzeko
-import os
-import stat
-import pwd
-import grp'''
 PORT_WEB = 8001
-#PORT_SSH = 8822
-# Ruta a la carpeta uploads dentro del servicio
-'''upload_folder = "/var/www/html/uploads"
-expected_permissions = 777
-expected_owner = "root"
-expected_group = "root"'''
-
+PORT_SSH = 22
 def ssh_connect():
     def decorator(func):
         def wrapper(*args, **kwargs):
@@ -58,25 +47,19 @@ class MyChecker(checkerlib.BaseChecker):
 
     def check_service(self):
         # check if ports are open
-        # if not self._check_port_web(self.ip, PORT_WEB) or not self._check_port_ssh(self.ip, PORT_SSH):
-        if not self._check_port_web(self.ip, PORT_WEB):
+        if not self._check_port_web(self.ip, PORT_WEB) or not self._check_port_ssh(self.ip, PORT_SSH):
             return checkerlib.CheckResult.DOWN
         #else
-        # check if server is Apache 2.4.62
-        '''if not self._check_apache_version():
-            return checkerlib.CheckResult.FAULTY'''
-        # check upload folder's permissions
-        #if not self._check_upload_security():
-           # return checkerlib.CheckResult.FAULTY
-        """# check if dev1 user exists in pasapasa_ssh docker
-        if not self._check_ssh_user('dev1'):
-            return checkerlib.CheckResult.FAULTY"""
-        '''file_path_web = '/var/www/html/index.php'
-        # check if index.php from erronka_php_1 has been changed by comparing its hash with the hash of the original file
-        if not self._check_web_integrity(file_path_web):
-            return checkerlib.CheckResult.FAULTY        
-        file_path_ssh = '/etc/ssh/sshd_config'
-        # check if /etc/sshd_config from erronka_ssh_1 has been changed by comparing its hash with the hash of the original file
+        # check if server is Apache 2.4.50
+        #if not self._check_apache_version():
+          #  return checkerlib.CheckResult.FAULTY
+        # check if dev1 user exists in pasapasa_ssh docker
+        '''file_path_web = '/usr/local/apache2/htdocs/index.html'''
+        # check if index.hmtl from pasapasa_web has been changed by comparing its hash with the hash of the original file
+        '''if not self._check_web_integrity(file_path_web):
+            return checkerlib.CheckResult.FAULTY  '''          
+        '''file_path_ssh = '/etc/ssh/sshd_config'
+        # check if /etc/sshd_config from pasapasa_ssh has been changed by comparing its hash with the hash of the original file
         if not self._check_ssh_integrity(file_path_ssh):
             return checkerlib.CheckResult.FAULTY            
         return checkerlib.CheckResult.OK'''
@@ -94,17 +77,17 @@ class MyChecker(checkerlib.BaseChecker):
             return checkerlib.CheckResult.FLAG_NOT_FOUND
         return checkerlib.CheckResult.OK
         
-    ''' @ssh_connect()
+    @ssh_connect()
     #Function to check if an user exists
     def _check_ssh_user(self, username):
         ssh_session = self.client
-        command = f"docker exec erronka_ssh_1 sh -c 'id {username}'"
+        command = f"docker exec erronka_php_1 sh -c 'id {username}'"
         stdin, stdout, stderr = ssh_session.exec_command(command)
         if stderr.channel.recv_exit_status() != 0:
             return False
-        return True'''
+        return True
       
-    '''@ssh_connect()
+    @ssh_connect()
     def _check_web_integrity(self, path):
         ssh_session = self.client
         command = f"docker exec erronka_php_1 sh -c 'cat {path}'"
@@ -115,10 +98,10 @@ class MyChecker(checkerlib.BaseChecker):
         output = stdout.read().decode().strip()
         return hashlib.md5(output.encode()).hexdigest() == 'a4ed71eb4f7c89ff868088a62fe33036'
     
-    @ssh_connect()
+    '''@ssh_connect()
     def _check_ssh_integrity(self, path):
         ssh_session = self.client
-        command = f"docker exec erronka_ssh_1 sh -c 'cat {path}'"
+        command = f"docker exec pasapasa_ssh_1 sh -c 'cat {path}'"
         stdin, stdout, stderr = ssh_session.exec_command(command)
         if stderr.channel.recv_exit_status() != 0:
             return False
@@ -164,7 +147,7 @@ class MyChecker(checkerlib.BaseChecker):
             if conn:
                 conn.close()
 
-    '''def _check_port_ssh(self, ip, port):
+    def _check_port_ssh(self, ip, port):
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(5)
@@ -174,9 +157,9 @@ class MyChecker(checkerlib.BaseChecker):
             print(f"Exception: {e}")
             return False
         finally:
-            sock.close()'''
+            sock.close()
 
-    '''@ssh_connect()
+    @ssh_connect()
     def _check_apache_version(self):
         ssh_session = self.client
         command = f"docker exec erronka_php_1 sh -c 'httpd -v | grep \"Apache/2.4.62\'"
@@ -186,39 +169,9 @@ class MyChecker(checkerlib.BaseChecker):
             return True
         else:
             return False
-    @ssh_connect()
-    def _check_upload_security(upload_folder, expected_permissions, expected_owner, expected_group):
-    #Verifica que los permisos, el propietario y el grupo de la carpeta de subidas no hayan cambiado.
-        #try:
-        # Obtener la información del archivo o carpeta
-            file_stat = os.stat(upload_folder)
-
-        # Verificar permisos
-            current_permissions = stat.S_IMODE(file_stat.st_mode)
-            if current_permissions != expected_permissions:
-                return False
-
-        # Verificar propietario
-            current_owner = pwd.getpwuid(file_stat.st_uid).pw_name
-            if current_owner != expected_owner:
-                return False
-
-        # Verificar grupo
-            current_group = grp.getgrgid(file_stat.st_gid).gr_name
-            if current_group != expected_group:
-                return False
-
-            return True
-
-    except FileNotFoundError:
-    return False
-    except PermissionError:
-        print(f"Error: No se puede acceder a '{upload_folder}'.")
-        return False'''
-    
+  
 if __name__ == '__main__':
     checkerlib.run_check(MyChecker)
-
 
 
 
