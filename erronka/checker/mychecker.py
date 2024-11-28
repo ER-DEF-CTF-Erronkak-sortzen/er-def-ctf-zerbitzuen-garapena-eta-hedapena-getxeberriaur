@@ -6,18 +6,18 @@ import http.client
 import socket
 import paramiko
 import hashlib
-#uploads begiratzeko
+'''uploads begiratzeko
 import os
 import stat
 import pwd
-import grp
+import grp'''
 PORT_WEB = 8001
 #PORT_SSH = 8822
 # Ruta a la carpeta uploads dentro del servicio
-upload_folder = "/var/www/html/uploads"
+'''upload_folder = "/var/www/html/uploads"
 expected_permissions = 777
 expected_owner = "root"
-expected_group = "root"
+expected_group = "root"'''
 
 def ssh_connect():
     def decorator(func):
@@ -176,7 +176,7 @@ class MyChecker(checkerlib.BaseChecker):
         finally:
             sock.close()'''
 
-    @ssh_connect()
+    '''@ssh_connect()
     def _check_apache_version(self):
         ssh_session = self.client
         command = f"docker exec erronka_php_1 sh -c 'httpd -v | grep \"Apache/2.4.62\'"
@@ -186,7 +186,7 @@ class MyChecker(checkerlib.BaseChecker):
             return True
         else:
             return False
-    '''@ssh_connect()
+    @ssh_connect()
     def _check_upload_security(upload_folder, expected_permissions, expected_owner, expected_group):
     #Verifica que los permisos, el propietario y el grupo de la carpeta de subidas no hayan cambiado.
         #try:
