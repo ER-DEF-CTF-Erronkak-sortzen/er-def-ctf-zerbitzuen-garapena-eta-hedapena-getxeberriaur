@@ -14,7 +14,7 @@ import grp
 PORT_WEB = 8001
 #PORT_SSH = 8822
 
-# Ruta a la carpeta uploads dentro del servicio
+# Uploads karpetaren ruta eta jabegoak
 upload_folder = "/var/www/html/uploads"
 expected_permissions = "drwxrwxrwx"
 expected_owner = "root"
@@ -59,7 +59,7 @@ class MyChecker(checkerlib.BaseChecker):
 
     def check_service(self):
         # check if ports are open
-        # if not self._check_port_web(self.ip, PORT_WEB) or not self._check_port_ssh(self.ip, PORT_SSH):
+        # if not self._check_port_web(self.ip, PORT_WEB) or not self._check_port_ssh(self.ip):
         if not self._check_port_web(self.ip, PORT_WEB):
             return checkerlib.CheckResult.DOWN
 
@@ -95,15 +95,15 @@ class MyChecker(checkerlib.BaseChecker):
             return checkerlib.CheckResult.FLAG_NOT_FOUND
         return checkerlib.CheckResult.OK
         
-    @ssh_connect()
-    #Function to check if an user exists
-    def _check_ssh_user(self, username):
-        ssh_session = self.client
-        command = f"docker exec erronka_ssh_1 sh -c 'id {username}'"
-        stdin, stdout, stderr = ssh_session.exec_command(command)
-        if stderr.channel.recv_exit_status() != 0:
-            return False
-        return True
+    # @ssh_connect()
+    # #Function to check if an user exists
+    # def _check_ssh_user(self, username):
+    #     ssh_session = self.client
+    #     command = f"docker exec erronka_ssh_1 sh -c 'id {username}'"
+    #     stdin, stdout, stderr = ssh_session.exec_command(command)
+    #     if stderr.channel.recv_exit_status() != 0:
+    #         return False
+    #     return True
       
     @ssh_connect()
     def _check_web_integrity(self, path):
@@ -179,7 +179,7 @@ class MyChecker(checkerlib.BaseChecker):
         
     @ssh_connect()
     def _check_upload_security(self, upload_folder, expected_permissions, expected_owner, expected_group):
-    #Verifica que los permisos, el propietario y el grupo de la carpeta de subidas no hayan cambiado.
+    #Uploads karpetak baimenak eta jabegoa ez direla aldatu ziurtatzen du.
     
         ssh_session = self.client
         command = f"docker exec erronka_php_1 sh -c 'ls -l {upload_folder}/.. | grep uploads'"
@@ -188,11 +188,11 @@ class MyChecker(checkerlib.BaseChecker):
         output = stdout.read().decode().strip()
         # drwxrwxrwx 1 root root 4096 Nov 19 23:21 uploads
     
-        # # Verificar permisos
+        # Baimenak konparatu
         if not (expected_permissions in str(output)):
             return False
 
-        # Verificar propietario y grupo
+        # Jabegoak eta taldea
         owner_group = expected_owner + " " + expected_group
         if not  owner_group in str(output):
             return False
