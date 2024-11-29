@@ -141,9 +141,9 @@ class MyChecker(checkerlib.BaseChecker):
         output = stdout.read().decode().strip()
         return flag == output
 
-    def _check_port_web(self, ip, port):
+    def _check_port_web(self, ip, PORT_WEB):
         try:
-            conn = http.client.HTTPConnection(ip, port, timeout=5)
+            conn = http.client.HTTPConnection(ip, PORT_WEB, timeout=5)
             conn.request("GET", "/")
             response = conn.getresponse()
             return response.status == 200
