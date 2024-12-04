@@ -43,8 +43,10 @@ If you are part of the defending team, your goal is to identify and fix this vul
   Ensure only safe file types, such as images, can be uploaded.
      
 # Checker checks:
+- Services is running. Check if erronka_php_1 container is running.
 - Ports to reach dockers are open (WEB:8001)
 - Upload folder has unchanged permissions: Set 777 permissions for the uploads directory
+- Upload folder exists.
 
 Checks done:
 Team 2: The content of index.php has changed to remove the Upload form and the checker has detected the change. FAULTY
