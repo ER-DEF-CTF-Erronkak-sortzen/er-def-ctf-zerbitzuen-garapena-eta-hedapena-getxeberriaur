@@ -50,7 +50,9 @@ Checks done:
 Team 2: Ha cambiado el contenido de index.php para quitar formulario Upload y el checker ha detectado el cambio. FAULTY
 Team 2: Ha parado el contenedor erronka_php_1. Servicio FAULTY. Debería de ser DOWN
 Team 1: Ha cambiado los permisos de la carpeta uploads. El checker ha detectado el cambio. FAULTY
+Team 1: Ha cambiado propietario de uploads. Creando un usuario nuevo (addsuser froga) y otorgando propietarios nuevos(chown froga:froga uploads) El checker ha detectado el cambio. FAULTY
 Team 1: Ha borrado de la ruta establecida la carpeta uploads. El checker ha detectado el cambio. FAULTY
+
 # License notes
 Parts from:
 https://github.com/kristianvld/SQL-Injection-Playground
