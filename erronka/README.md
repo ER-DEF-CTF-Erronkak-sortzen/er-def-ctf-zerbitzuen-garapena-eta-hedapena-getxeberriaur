@@ -47,11 +47,12 @@ If you are part of the defending team, your goal is to identify and fix this vul
 - Upload folder has unchanged permissions: Set 777 permissions for the uploads directory
 
 Checks done:
-Team 2: Ha cambiado el contenido de index.php para quitar formulario Upload y el checker ha detectado el cambio. FAULTY
-Team 2: Ha parado el contenedor erronka_php_1. Servicio FAULTY. Debería de ser DOWN
-Team 1: Ha cambiado los permisos de la carpeta uploads. El checker ha detectado el cambio. FAULTY
-Team 1: Ha cambiado propietario de uploads. Creando un usuario nuevo (addsuser froga) y otorgando propietarios nuevos(chown froga:froga uploads) El checker ha detectado el cambio. FAULTY
-Team 1: Ha borrado de la ruta establecida la carpeta uploads. El checker ha detectado el cambio. FAULTY
+Team 2: The content of index.php has changed to remove the Upload form and the checker has detected the change. FAULTY
+Team 2: The erronka_php_1 container has been stopped. FAULTY service. It should be DOWN
+Team 1: The permissions of the uploads folder has changed. The checker has detected the change. FAULTY
+Team 1: Upload owner has changed. Creating a new user (addsuser froga) and granting new owners (chown froga:froga uploads) The checker has detected the change. FAULTY
+Team 1: Team 1 have deleted the uploads folder from the established path. The checker has detected the change. FAULTY
+Team 1: Has closed the port 8001. The checker has detected the change. FAULTY.
 
 # License notes
 Parts from:
