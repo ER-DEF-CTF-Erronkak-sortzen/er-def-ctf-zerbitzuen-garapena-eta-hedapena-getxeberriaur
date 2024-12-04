@@ -52,7 +52,7 @@ Team 2: The erronka_php_1 container has been stopped. FAULTY service. It should 
 Team 1: The permissions of the uploads folder has changed. The checker has detected the change. FAULTY
 Team 1: Upload owner has changed. Creating a new user (addsuser froga) and granting new owners (chown froga:froga uploads) The checker has detected the change. FAULTY
 Team 1: Team 1 have deleted the uploads folder from the established path. The checker has detected the change. FAULTY
-Team 1: Has closed the port 8001. The checker has detected the change. FAULTY.
+Team 1: Has closed the port 8001. The checker has detected the change. DOWN.
 
 # License notes
 Parts from:

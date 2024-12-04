@@ -5,6 +5,6 @@ services:
             context: ./php
             dockerfile: Dockerfile
         ports:
-            - "8001:80"
+            - "8005:80"
       
                         
