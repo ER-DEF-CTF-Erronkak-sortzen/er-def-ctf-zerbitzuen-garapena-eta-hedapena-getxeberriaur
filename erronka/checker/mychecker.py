@@ -6,10 +6,10 @@ import http.client
 import socket
 import paramiko
 import hashlib
-import os
-import stat
-import pwd
-import grp
+#import os
+#import stat
+#import pwd
+#import grp
 
 PORT_WEB = 8001
 
