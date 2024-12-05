@@ -59,10 +59,10 @@ class MyChecker(checkerlib.BaseChecker):
     def check_service(self):
         # check if ports are open
         # if not self._check_port_web(self.ip, PORT_WEB):
-        if not self._check_port_web(self.ip, PORT_WEB):
-            return checkerlib.CheckResult.DOWN
-        
         if not self._check_container_running():
+            return checkerlib.CheckResult.DOWN
+
+        if not self._check_port_web(self.ip, PORT_WEB):
             return checkerlib.CheckResult.DOWN
 
         # check if server is Apache 2.4.62
