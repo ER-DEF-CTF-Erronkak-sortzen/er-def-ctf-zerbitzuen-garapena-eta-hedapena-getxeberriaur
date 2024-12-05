@@ -58,7 +58,7 @@ class MyChecker(checkerlib.BaseChecker):
 
     def check_service(self):
         # check if ports are open
-        # if not self._check_port_web(self.ip, PORT_WEB) or not self._check_port_ssh(self.ip):
+        # if not self._check_port_web(self.ip, PORT_WEB):
         if not self._check_port_web(self.ip, PORT_WEB):
             return checkerlib.CheckResult.DOWN
 
