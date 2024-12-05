@@ -12,7 +12,6 @@ import pwd
 import grp
 
 PORT_WEB = 8001
-#PORT_SSH = 8822
 
 # Uploads karpetaren ruta eta jabegoak
 upload_folder = "/var/www/html/uploads"
@@ -75,11 +74,7 @@ class MyChecker(checkerlib.BaseChecker):
         # check if index.php from erronka_php_1 has been changed by comparing its hash with the hash of the original file
         if not self._check_web_integrity(file_path_web):
             return checkerlib.CheckResult.FAULTY        
-        
-        # file_path_ssh = '/etc/ssh/sshd_config'
-        # # check if /etc/sshd_config from erronka_ssh_1 has been changed by comparing its hash with the hash of the original file
-        # if not self._check_ssh_integrity(file_path_ssh):
-        #     return checkerlib.CheckResult.FAULTY           
+               
         return checkerlib.CheckResult.OK
     
     def check_flag(self, tick):
@@ -94,16 +89,7 @@ class MyChecker(checkerlib.BaseChecker):
         if not flag_present:
             return checkerlib.CheckResult.FLAG_NOT_FOUND
         return checkerlib.CheckResult.OK
-        
-    # @ssh_connect()
-    # #Function to check if an user exists
-    # def _check_ssh_user(self, username):
-    #     ssh_session = self.client
-    #     command = f"docker exec erronka_ssh_1 sh -c 'id {username}'"
-    #     stdin, stdout, stderr = ssh_session.exec_command(command)
-    #     if stderr.channel.recv_exit_status() != 0:
-    #         return False
-    #     return True
+
       
     @ssh_connect()
     def _check_web_integrity(self, path):
