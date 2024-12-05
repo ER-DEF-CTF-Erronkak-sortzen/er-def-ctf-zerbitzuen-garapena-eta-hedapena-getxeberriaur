@@ -61,6 +61,9 @@ class MyChecker(checkerlib.BaseChecker):
         # if not self._check_port_web(self.ip, PORT_WEB):
         if not self._check_port_web(self.ip, PORT_WEB):
             return checkerlib.CheckResult.DOWN
+        
+        if not self._check_container_running():
+            return checkerlib.CheckResult.DOWN
 
         # check if server is Apache 2.4.62
         if not self._check_apache_version():
@@ -126,6 +129,13 @@ class MyChecker(checkerlib.BaseChecker):
 
         output = stdout.read().decode().strip()
         return flag == output
+    
+    def _check_container_running(self):
+        ssh_session = self.client
+        if f"docker ps | grep erronka_php_1":
+            return True
+        else:
+            return False
 
     def _check_port_web(self, ip, PORT_WEB):
         try:
