@@ -45,16 +45,16 @@ class MyChecker(checkerlib.BaseChecker):
         self._baseurl = f'http://[{self.ip}]:{PORT_WEB}'
         logging.info(f"URL: {self._baseurl}")
 
-    # @ssh_connect()
-    # def place_flag(self, tick):
-    #     flag = checkerlib.get_flag(tick)
-    #     creds = self._add_new_flag(self.client, flag)
-    #     if not creds:
-    #         return checkerlib.CheckResult.FAULTY
-    #     logging.info('created')
-    #     checkerlib.store_state(str(tick), creds)
-    #     checkerlib.set_flagid(str(tick))
-    #     return checkerlib.CheckResult.OK
+    @ssh_connect()
+    def place_flag(self, tick):
+        flag = checkerlib.get_flag(tick)
+        creds = self._add_new_flag(self.client, flag)
+        if not creds:
+            return checkerlib.CheckResult.FAULTY
+        logging.info('created')
+        checkerlib.store_state(str(tick), creds)
+        checkerlib.set_flagid(str(tick))
+        return checkerlib.CheckResult.OK
 
     def check_service(self):
         
