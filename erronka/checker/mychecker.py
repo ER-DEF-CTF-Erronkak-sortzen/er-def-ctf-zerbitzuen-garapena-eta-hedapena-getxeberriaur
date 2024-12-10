@@ -60,8 +60,8 @@ class MyChecker(checkerlib.BaseChecker):
         
         # check container running:
 
-        # if not self._check_container_running(self):
-        #     return checkerlib.CheckResult.DOWN
+        if not self._check_container_running(self):
+            return checkerlib.CheckResult.DOWN
 
         # check if ports are open
         # if not self._check_port_web(self.ip, PORT_WEB):
