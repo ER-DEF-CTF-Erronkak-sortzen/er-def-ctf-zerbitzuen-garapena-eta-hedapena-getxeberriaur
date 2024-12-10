@@ -57,12 +57,13 @@ class MyChecker(checkerlib.BaseChecker):
         return checkerlib.CheckResult.OK
 
     def check_service(self):
-        # check if ports are open
-        # if not self._check_container_running(self):
-
-        if not self._check_container_running(self):
-            return checkerlib.CheckResult.DOWN
         
+        # check container running:
+
+        # if not self._check_container_running(self):
+        #     return checkerlib.CheckResult.DOWN
+
+        # check if ports are open
         # if not self._check_port_web(self.ip, PORT_WEB):
         if not self._check_port_web(self.ip, PORT_WEB):
             return checkerlib.CheckResult.DOWN
@@ -132,16 +133,16 @@ class MyChecker(checkerlib.BaseChecker):
         output = stdout.read().decode().strip()
         return flag == output
     
-    def _check_container_running(self):
-        ssh_session = self.client
-        command = f"docker ps | grep erronka_php_1"
-        stdin, stdout, stderr = ssh_session.exec_command(command)
-        output = stdout.read().decode().strip()
-        error = stderr.read().decode().strip()
-        if output:  
-            return True
-        else:
-            return False
+    # def _check_container_running(self):
+    #     ssh_session = self.client
+    #     command = f"docker ps | grep erronka_php_1"
+    #     stdin, stdout, stderr = ssh_session.exec_command(command)
+    #     output = stdout.read().decode().strip()
+    #     error = stderr.read().decode().strip()
+    #     if output:  
+    #         return True
+    #     else:
+    #         return False
 
     def _check_port_web(self, ip, PORT_WEB):
         try:
