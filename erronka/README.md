@@ -50,7 +50,7 @@ If you are part of the defending team, your goal is to identify and fix this vul
 
 Checks done:
 Team 2: The content of index.php has changed to remove the Upload form and the checker has detected the change. FAULTY
-Team 2: The erronka_php_1 container has been stopped. FAULTY service. It should be DOWN
+Team 2: The erronka_php_1 container has been stopped. FAULTY service. It should be DOWN, but the checker detects FLAGS aren't deposite and salta la alarma FAULTY.
 Team 1: The permissions of the uploads folder has changed. The checker has detected the change. FAULTY
 Team 1: Upload owner has changed. Creating a new user (addsuser froga) and granting new owners (chown froga:froga uploads) The checker has detected the change. FAULTY
 Team 1: Team 1 have deleted the uploads folder from the established path. The checker has detected the change. FAULTY
