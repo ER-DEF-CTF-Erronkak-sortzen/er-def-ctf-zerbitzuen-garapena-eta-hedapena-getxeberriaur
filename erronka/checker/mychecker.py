@@ -6,10 +6,6 @@ import http.client
 import socket
 import paramiko
 import hashlib
-#import os
-#import stat
-#import pwd
-#import grp
 
 PORT_WEB = 8001
 
@@ -59,7 +55,6 @@ class MyChecker(checkerlib.BaseChecker):
     def check_service(self):
         
         # check if container is running:
-
         if not self._check_container_running():
             return checkerlib.CheckResult.DOWN
 
