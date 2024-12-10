@@ -133,16 +133,16 @@ class MyChecker(checkerlib.BaseChecker):
         output = stdout.read().decode().strip()
         return flag == output
     
-    # def _check_container_running(self):
-    #     ssh_session = self.client
-    #     command = f"docker ps | grep erronka_php_1"
-    #     stdin, stdout, stderr = ssh_session.exec_command(command)
-    #     output = stdout.read().decode().strip()
-    #     error = stderr.read().decode().strip()
-    #     if output:  
-    #         return True
-    #     else:
-    #         return False
+    def _check_container_running(self):
+        ssh_session = self.client
+        command = f"docker ps | grep erronka_php_1"
+        stdin, stdout, stderr = ssh_session.exec_command(command)
+        # output = stdout.read().decode().strip()
+        # error = stderr.read().decode().strip()
+        if stdout:  
+            return True
+        else:
+            return False
 
     def _check_port_web(self, ip, PORT_WEB):
         try:
