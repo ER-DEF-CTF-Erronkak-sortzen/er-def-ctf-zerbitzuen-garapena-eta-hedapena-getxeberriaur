@@ -60,7 +60,7 @@ class MyChecker(checkerlib.BaseChecker):
         
         # check container running:
 
-        if not self._check_container_running(self):
+        if not self._check_container_running():
             return checkerlib.CheckResult.DOWN
 
         # check if ports are open
@@ -138,9 +138,9 @@ class MyChecker(checkerlib.BaseChecker):
         ssh_session = self.client
         command = f"docker ps | grep erronka_php_1"
         stdin, stdout, stderr = ssh_session.exec_command(command)
-        # output = stdout.read().decode().strip()
-        # error = stderr.read().decode().strip()
-        if stdout:  
+        output = stdout.read().decode().strip()
+        error = stderr.read().decode().strip()
+        if output:  
             return True
         else:
             return False
