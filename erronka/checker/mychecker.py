@@ -13,7 +13,7 @@ import hashlib
 
 PORT_WEB = 8001
 
-# Uploads karpetaren ruta eta jabegoak
+# Uploads folder path and properties
 upload_folder = "/var/www/html/uploads"
 expected_permissions = "drwxrwxrwx"
 expected_owner = "root"
@@ -58,7 +58,7 @@ class MyChecker(checkerlib.BaseChecker):
 
     def check_service(self):
         
-        # check container running:
+        # check if container is running:
 
         if not self._check_container_running():
             return checkerlib.CheckResult.DOWN
@@ -69,17 +69,17 @@ class MyChecker(checkerlib.BaseChecker):
             return checkerlib.CheckResult.DOWN
 
         # check if server is Apache 2.4.62
-        # if not self._check_apache_version():
-        #     return checkerlib.CheckResult.FAULTY
+        if not self._check_apache_version():
+            return checkerlib.CheckResult.FAULTY
 
         # check upload folder's permissions
-        # if not self._check_upload_security(upload_folder, expected_permissions, expected_owner, expected_group):
-        #    return checkerlib.CheckResult.FAULTY
+        if not self._check_upload_security(upload_folder, expected_permissions, expected_owner, expected_group):
+           return checkerlib.CheckResult.FAULTY
 
         file_path_web = '/var/www/html/index.php'
         # check if index.php from erronka_php_1 has been changed by comparing its hash with the hash of the original file
-        # if not self._check_web_integrity(file_path_web):
-        #     return checkerlib.CheckResult.FAULTY        
+        if not self._check_web_integrity(file_path_web):
+            return checkerlib.CheckResult.FAULTY        
                
         return checkerlib.CheckResult.OK
     
@@ -183,7 +183,7 @@ class MyChecker(checkerlib.BaseChecker):
         
     @ssh_connect()
     def _check_upload_security(self, upload_folder, expected_permissions, expected_owner, expected_group):
-    #Uploads karpetak baimenak eta jabegoa ez direla aldatu ziurtatzen du.
+        #Ensures that Uploads folder permissions and ownership have not changed.
     
         ssh_session = self.client
         command = f"docker exec erronka_php_1 sh -c 'ls -l {upload_folder}/.. | grep uploads'"
@@ -192,11 +192,11 @@ class MyChecker(checkerlib.BaseChecker):
         output = stdout.read().decode().strip()
         # drwxrwxrwx 1 root root 4096 Nov 19 23:21 uploads
     
-        # Baimenak konparatu
+        #Compare permissions
         if not (expected_permissions in str(output)):
             return False
 
-        # Jabegoak eta taldea
+        # Ownership and group
         owner_group = expected_owner + " " + expected_group
         if not  owner_group in str(output):
             return False
