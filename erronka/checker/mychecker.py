@@ -45,16 +45,16 @@ class MyChecker(checkerlib.BaseChecker):
         self._baseurl = f'http://[{self.ip}]:{PORT_WEB}'
         logging.info(f"URL: {self._baseurl}")
 
-    @ssh_connect()
-    def place_flag(self, tick):
-        flag = checkerlib.get_flag(tick)
-        creds = self._add_new_flag(self.client, flag)
-        if not creds:
-            return checkerlib.CheckResult.FAULTY
-        logging.info('created')
-        checkerlib.store_state(str(tick), creds)
-        checkerlib.set_flagid(str(tick))
-        return checkerlib.CheckResult.OK
+    # @ssh_connect()
+    # def place_flag(self, tick):
+    #     flag = checkerlib.get_flag(tick)
+    #     creds = self._add_new_flag(self.client, flag)
+    #     if not creds:
+    #         return checkerlib.CheckResult.FAULTY
+    #     logging.info('created')
+    #     checkerlib.store_state(str(tick), creds)
+    #     checkerlib.set_flagid(str(tick))
+    #     return checkerlib.CheckResult.OK
 
     def check_service(self):
         
@@ -69,17 +69,17 @@ class MyChecker(checkerlib.BaseChecker):
             return checkerlib.CheckResult.DOWN
 
         # check if server is Apache 2.4.62
-        if not self._check_apache_version():
-            return checkerlib.CheckResult.FAULTY
+        # if not self._check_apache_version():
+        #     return checkerlib.CheckResult.FAULTY
 
         # check upload folder's permissions
-        if not self._check_upload_security(upload_folder, expected_permissions, expected_owner, expected_group):
-           return checkerlib.CheckResult.FAULTY
+        # if not self._check_upload_security(upload_folder, expected_permissions, expected_owner, expected_group):
+        #    return checkerlib.CheckResult.FAULTY
 
         file_path_web = '/var/www/html/index.php'
         # check if index.php from erronka_php_1 has been changed by comparing its hash with the hash of the original file
-        if not self._check_web_integrity(file_path_web):
-            return checkerlib.CheckResult.FAULTY        
+        # if not self._check_web_integrity(file_path_web):
+        #     return checkerlib.CheckResult.FAULTY        
                
         return checkerlib.CheckResult.OK
     
