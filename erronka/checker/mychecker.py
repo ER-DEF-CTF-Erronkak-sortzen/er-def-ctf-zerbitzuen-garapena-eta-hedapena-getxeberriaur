@@ -133,6 +133,7 @@ class MyChecker(checkerlib.BaseChecker):
         output = stdout.read().decode().strip()
         return flag == output
     
+    @ssh_connect()
     def _check_container_running(self):
         ssh_session = self.client
         command = f"docker ps | grep erronka_php_1"
